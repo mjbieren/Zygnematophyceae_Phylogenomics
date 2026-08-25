@@ -1,0 +1,10 @@
+arch_neg	-	Archaea
+bact_neg	-	Bacteria
+virus_neg	-	Viruses
+fungi_neg	-	Fungi
+invert_neg	-	Invertebrates
+plast_neg	-	Plastids
+plasm_neg	-	Plasmids
+mito_neg	-	Mitochondria
+proto_neg	-	Protists
+zygn_pos	+	Zygnematophyceae_positive_reference
