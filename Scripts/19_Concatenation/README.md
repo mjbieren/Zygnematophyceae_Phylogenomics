@@ -2,7 +2,7 @@
 
 This step concatenates multiple alignments into a single large alignment file using **phyx**, a set of phylogenetic tools for Unix.
 
-To run this, edit and execute the script [ConcatAlignments_FromAnyFolder_Phyx.sh](https://github.com/mjbieren/Phylogenomics_klebsormidiophyceae/blob/main/Scripts/17_ConcatenateSequences/ConcatAlignments_FromAnyFolder_Phyx.sh). You can run it either within a conda environment (if phyx is not installed locally) or directly on your system.
+To run this, edit and execute the script [19_Concatenate_phyx.sh](https://github.com/mjbieren/Phylogenomics_klebsormidiophyceae/blob/main/Scripts/17_ConcatenateSequences/19_Concatenate_phyx.sh). You can run it either within a conda environment (if phyx is not installed locally) or directly on your system.
 
 To create a conda environment with phyx use:
 
@@ -17,5 +17,5 @@ pxcat -s *.[FILE_EXTENSION] -p [OUTPUT_File].output_partition_file -o [OUTPUT_Fi
 ```
 
 
-See [19_Concatenate_phyx.sh](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/19_Concatenation/19_Concatenate_phyx.sh) for an example script.
+See [19_Concatenate_phyx.sh](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/19_Concatenate_phyx.sh) for an example script.
 
