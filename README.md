@@ -209,10 +209,10 @@ Following transcriptome assembly, the Zygnematophyceae dataset was processed thr
     → [21_ITOL](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/21_ITOL)
 
 22. **Approximately Unbiased (AU) topology tests**  
-    → [22_AU_Test](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/23_AU_Test)
+    → [22_AU_Test](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/22_AU_Test)
 
 23. **Ancestral Character State Reconstruction (ACSR)**  
-    → [23_ACSR](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/24_ACSR)
+    → [23_ACSR](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/23_ACSR)
 
 Project-specific parameters, taxonomic thresholds, reference datasets, filtering criteria and example scripts are documented within the corresponding workflow directories and should be consulted rather than assumed to be identical to those used for other phylogenomic datasets.
 ---
