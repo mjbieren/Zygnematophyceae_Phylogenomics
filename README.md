@@ -208,17 +208,11 @@ Following transcriptome assembly, the Zygnematophyceae dataset was processed thr
 21. **Tree visualization and annotation with iTOL**  
     → [21_ITOL](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/21_ITOL)
 
-22. **Divergence-time estimation (TimeTree)**  
-    → [22_TimeTree](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/22_TimeTree)
+22. **Approximately Unbiased (AU) topology tests**  
+    → [22_AU_Test](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/23_AU_Test)
 
-23. **Approximately Unbiased (AU) topology tests**  
-    → [23_AU_Test](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/23_AU_Test)
-
-24. **Ancestral Character State Reconstruction (ACSR)**  
-    → [24_ACSR](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/24_ACSR)
-
-25. **Differential expression interpretation for orthogroups**  
-    → [25_DE](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/25_DE)
+23. **Ancestral Character State Reconstruction (ACSR)**  
+    → [23_ACSR](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/24_ACSR)
 
 Project-specific parameters, taxonomic thresholds, reference datasets, filtering criteria and example scripts are documented within the corresponding workflow directories and should be consulted rather than assumed to be identical to those used for other phylogenomic datasets.
 ---
