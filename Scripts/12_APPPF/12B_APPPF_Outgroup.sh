@@ -1,22 +1,147 @@
 #!/bin/bash
 
-APPPF_PATH=~/Programs/APPPF/APPPFormat_Debian.out #APPPFormat.out
-TREE_FILES= #Path to the treefiles aka output of step 11B.
-TREEFORMAT=treefile #Name of the file extension without a .
-APPPF_OUTPUT= #Output Folder for the program. Be sure to be make it different than script 12A
-TAXANOMIC_GROUP_FILE=~/TaxonomicGroup/Zygnematophyceae_TaxonomicGroupFile_WORKING.txt #Path to your taxanomic group file. Doesn't matter which of the 3 you pick :)
+# ============================================================
+# Apply PhyloPyPruner Format (APPPFormat) - OUTGROUP
+#
+# APPPFormat:
+# https://github.com/mjbieren/ApplyPPPFormat
+#
+# This script prepares the OUTGROUP gene trees and alignments
+# for use with PhyloPyPruner.
+# ============================================================
 
-#Program format can be any order after program path
-#[Program_Path] -i [PathToTrees] -t [FileExtensionOfTrees] -r [OutputFolderPath] -g [TaxonomicGroupFilePath] -m [MafftFilesPath:NOT REQUIRED]
 
-#-i <PathToTrees> Set the path where the tree files are located. This is in newick format.[REQUIRED]
-#-t <TreeFileExtension> Set the extension for the newick trees. For example .treefile.
-#-g <TaxonomicGroupFile> Set the Taxonomic Group File, used to find the exact position to replace the _ with @ [REQUIRED]
-#-r <OutputFolderPath> Set the Output Folder Path: [REQUIRED]
-#-m <PathToMafftFiles> Set the path if you want to move your msa files (.mafft extension) and place them in your output folder. The extension automatically get changed from .mafft to .fa. [NOT REQUIRED]
+# ------------------------------------------------------------
+# SETTINGS
+# ------------------------------------------------------------
 
-$APPPF_PATH -i $TREE_FILES -t $TREEFORMAT -r $APPPF_OUTPUT -g $TAXANOMIC_GROUP_FILE -m $TREE_FILES
+# Path to APPPFormat executable
+APPPF_PATH=##                   # Change this
 
-#copy the .fa files into the output folder, currently APPPF doesn't take .fa (only .mafft)
-cd ${TREE_FILES}
-cp *.fa ${APPF_OUTPUT}
+# Folder containing the OUTGROUP MIAF output
+# (*.treefile and corresponding alignment files)
+TREE_FILES=##                   # Change this
+
+# Tree file extension WITHOUT the dot
+TREEFORMAT="treefile"
+
+# Output folder for the OUTGROUP PhyloPyPruner-ready files
+APPPF_OUTPUT=##                 # Change this
+
+# Taxonomic group file
+#
+# APPPFormat uses this file to identify the taxon names and
+# determine the correct position of the @ separator.
+#
+# It does NOT matter which Zygnematophyceae taxonomic-group
+# file is used, as long as all taxa present in this dataset
+# are represented in the selected file.
+TAXONOMIC_GROUP_FILE=##         # Change this
+
+
+# ------------------------------------------------------------
+# APPPFORMAT OPTIONS
+# ------------------------------------------------------------
+
+# -i  Folder containing the Newick tree files
+#
+# -t  Tree file extension without "."
+#
+# -r  Output folder
+#
+# -g  Taxonomic group file used to identify the correct
+#     taxon names in the tree headers
+#
+# -m  Folder containing corresponding MAFFT files.
+#     APPPFormat can move/copy these into the output folder
+#     and change the .mafft extension to .fa.
+
+
+# ------------------------------------------------------------
+# CHECK INPUT
+# ------------------------------------------------------------
+
+if [ ! -f "${APPPF_PATH}" ]; then
+    echo "ERROR: APPPFormat executable not found:"
+    echo "${APPPF_PATH}"
+    exit 1
+fi
+
+if [ ! -d "${TREE_FILES}" ]; then
+    echo "ERROR: OUTGROUP tree folder not found:"
+    echo "${TREE_FILES}"
+    exit 1
+fi
+
+if [ ! -f "${TAXONOMIC_GROUP_FILE}" ]; then
+    echo "ERROR: Taxonomic group file not found:"
+    echo "${TAXONOMIC_GROUP_FILE}"
+    exit 1
+fi
+
+
+# ------------------------------------------------------------
+# CREATE OUTPUT DIRECTORY
+# ------------------------------------------------------------
+
+mkdir -p "${APPPF_OUTPUT}" || {
+    echo "ERROR: Could not create output folder:"
+    echo "${APPPF_OUTPUT}"
+    exit 1
+}
+
+
+# ============================================================
+# RUN APPPFORMAT - OUTGROUP
+# ============================================================
+
+echo
+echo "============================================================"
+echo "Running APPPFormat - OUTGROUP"
+echo "============================================================"
+echo
+echo "Tree folder:      ${TREE_FILES}"
+echo "Tree extension:   .${TREEFORMAT}"
+echo "Taxonomic groups: ${TAXONOMIC_GROUP_FILE}"
+echo "Output folder:    ${APPPF_OUTPUT}"
+echo
+
+
+"${APPPF_PATH}" \
+    -i "${TREE_FILES}" \
+    -t "${TREEFORMAT}" \
+    -r "${APPPF_OUTPUT}" \
+    -g "${TAXONOMIC_GROUP_FILE}" \
+    -m "${TREE_FILES}" \
+    || exit 1
+
+
+# ------------------------------------------------------------
+# COPY EXISTING .fa ALIGNMENTS
+# ------------------------------------------------------------
+
+# APPPFormat handles .mafft files through the -m option.
+#
+# If MIAF already produced .fa alignment files, APPPFormat
+# currently does not process these through -m.
+#
+# Therefore copy existing .fa files manually.
+
+shopt -s nullglob
+
+FASTA_FILES=("${TREE_FILES}"/*.fa)
+
+if [ ${#FASTA_FILES[@]} -gt 0 ]; then
+
+    echo
+    echo "Copying existing OUTGROUP .fa alignment files"
+
+    cp "${FASTA_FILES[@]}" "${APPPF_OUTPUT}/" || exit 1
+
+fi
+
+
+echo
+echo "============================================================"
+echo "APPPFormat OUTGROUP completed successfully"
+echo "============================================================"
