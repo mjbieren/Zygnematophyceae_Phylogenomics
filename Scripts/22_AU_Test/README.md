@@ -39,6 +39,8 @@ iqtree2 -s alignment.fas -z all_trees.nwk -au -m MFP -pre AU_Test_Zygn
 
 ---
 
+Or use the Script: [22_AU_TopologyTest_LGC60G.sh](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/22_AU_Test/22_AU_TopologyTest_LGC60G.sh)
+
 ## 📊 Result Summary
 
 ### Topology Test Table (From `AU_Test_Zygn.iqtree`)
