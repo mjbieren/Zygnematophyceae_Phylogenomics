@@ -1,0 +1,171 @@
+#!/bin/bash
+
+# ============================================================
+# Filter PhyloPyPruner Result (FPPP) - INGROUP
+#
+# FilterPPPResult:
+# https://github.com/mjbieren/FilterPPPResult
+#
+# PhyloPyPruner can split orthogroups into multiple subgroups.
+# These resulting groups can contain too few representatives
+# from the required taxonomic groups.
+#
+# FilterPPPResult filters these resulting FASTA files based
+# on a taxonomic-group threshold.
+#
+# This script is specifically for the INGROUP dataset.
+# ============================================================
+
+
+# ------------------------------------------------------------
+# SETTINGS
+# ------------------------------------------------------------
+
+# Path to FilterPPPResult executable
+PROGRAMPATH=##                  # Change this
+
+# PhyloPyPruner INGROUP output alignments
+#
+# Usually:
+# phylopypruner_output/output_alignments/
+INPUT=##                        # Change this
+
+# Output folder for the filtered INGROUP loci
+OUTPUT=##                       # Change this
+
+# Zygnematophyceae taxonomic group file used specifically
+# for filtering the PhyloPyPruner results
+TAXONOMIC_GROUPFILE="TaxonomicGroupFile_FPPP_Zygnema.txt"
+
+# Output folder for the FilterPPPResult summary
+SUMMARY_FILE=##                 # Change this
+
+# Minimum number of different taxonomic groups that must
+# be represented for a locus to be retained
+NUMBER_OF_FILTER_GROUPS=10
+
+
+# ------------------------------------------------------------
+# FILTERING SETTINGS
+# ------------------------------------------------------------
+
+# This INGROUP analysis requires:
+#
+#   TaxonomicGroupFile_FPPP_Zygnema.txt
+#
+# with a threshold of:
+#
+#   10 taxonomic groups
+#
+# This means that a PhyloPyPruner output locus is retained
+# only when at least 10 DIFFERENT taxonomic groups defined
+# in TaxonomicGroupFile_FPPP_Zygnema.txt are represented.
+#
+# The threshold refers to TAXONOMIC GROUPS, not simply the
+# number of sequences or strains.
+
+
+# ------------------------------------------------------------
+# FILTERPPPRESULT OPTIONS
+# ------------------------------------------------------------
+
+# -f  Folder containing the PhyloPyPruner output alignments
+#
+# -t  Taxonomic group file
+#
+# -r  Output folder
+#
+# -n  Minimum number of taxonomic groups required
+#
+# -s  Path where the summary file should be written
+#
+# -h  Remove gene IDs from FASTA headers.
+#     Only the strain/species names are retained.
+#
+# -a  Remove alignment gaps ("-") from the sequences.
+#
+#
+# IMPORTANT:
+#
+# We use BOTH:
+#
+#   -a -h
+#
+# for this workflow.
+#
+# The resulting sequences therefore:
+#
+#   - contain only strain/species names in their headers
+#   - are no longer aligned
+#
+# Removing the alignment gaps is useful because the retained
+# sequences can subsequently be realigned from scratch.
+
+
+# ------------------------------------------------------------
+# CHECK INPUT
+# ------------------------------------------------------------
+
+if [ ! -f "${PROGRAMPATH}" ]; then
+    echo "ERROR: FilterPPPResult executable not found:"
+    echo "${PROGRAMPATH}"
+    exit 1
+fi
+
+if [ ! -d "${INPUT}" ]; then
+    echo "ERROR: PhyloPyPruner INGROUP alignment folder not found:"
+    echo "${INPUT}"
+    exit 1
+fi
+
+if [ ! -f "${TAXONOMIC_GROUPFILE}" ]; then
+    echo "ERROR: FPPP taxonomic group file not found:"
+    echo "${TAXONOMIC_GROUPFILE}"
+    exit 1
+fi
+
+
+# ------------------------------------------------------------
+# CREATE OUTPUT DIRECTORY
+# ------------------------------------------------------------
+
+mkdir -p "${OUTPUT}" || {
+    echo "ERROR: Could not create output folder:"
+    echo "${OUTPUT}"
+    exit 1
+}
+
+
+# ============================================================
+# RUN FILTERPPPRESULT - INGROUP
+# ============================================================
+
+echo
+echo "============================================================"
+echo "Running FilterPPPResult - INGROUP"
+echo "============================================================"
+echo
+echo "Input:             ${INPUT}"
+echo "Taxonomic groups:  ${TAXONOMIC_GROUPFILE}"
+echo "Minimum groups:    ${NUMBER_OF_FILTER_GROUPS}"
+echo "Output:            ${OUTPUT}"
+echo "Remove gene IDs:   YES"
+echo "Remove gaps:       YES"
+echo
+
+
+"${PROGRAMPATH}" \
+    -f "${INPUT}" \
+    -t "${TAXONOMIC_GROUPFILE}" \
+    -r "${OUTPUT}" \
+    -n "${NUMBER_OF_FILTER_GROUPS}" \
+    -s "${SUMMARY_FILE}" \
+    -a \
+    -h \
+    || exit 1
+
+
+echo
+echo "============================================================"
+echo "FilterPPPResult INGROUP completed successfully"
+echo "============================================================"
