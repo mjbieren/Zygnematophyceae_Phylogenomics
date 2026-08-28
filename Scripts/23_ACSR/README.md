@@ -1,4 +1,4 @@
-# 24. Ancestral Character State Reconstruction (ACSR)
+# 23. Ancestral Character State Reconstruction (ACSR)
 
 The manuscript states that ancestral character state reconstruction followed the established Bierenbroodspot et al. framework, but the supplied manuscript does not provide the final Zygnematophyceae trait matrices or executable R inputs.
 
