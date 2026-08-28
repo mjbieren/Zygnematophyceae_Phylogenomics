@@ -1,4 +1,4 @@
-# 23. AU Test – Tree Topology Testing with IQ-TREE
+# 22. AU Test – Tree Topology Testing with IQ-TREE
 
 This analysis performs an **Approximately Unbiased (AU) test** to evaluate the statistical support for alternative phylogenetic hypotheses in the *Zygnematophyceae* dataset. The AU test was carried out using **IQ-TREE v2**.
 
