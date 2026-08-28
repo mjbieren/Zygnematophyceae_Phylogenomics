@@ -143,7 +143,7 @@ Trinity \
 
 For additional information on Trinity and its available parameters, see the [Trinity documentation](https://github.com/trinityrnaseq/trinityrnaseq/wiki).
 
-Detailed scripts and commands used for this project are provided in `02_Trinity`.
+Detailed scripts and commands used for this project are provided in [02_Trinity](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/02_Trinity).
 
 ---
 
