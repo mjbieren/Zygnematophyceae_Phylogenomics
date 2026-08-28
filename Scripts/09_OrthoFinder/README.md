@@ -20,7 +20,7 @@ The version I ran was based on the GitHub release, but you can also install Orth
 conda install orthofinder -c bioconda
 ```
 
-To guide the inference process and improve the accuracy of the orthology assignment, the guide tree [Zygn_Orthofinder_GuideTree.txt](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/09_OrthoFinder/Zygn_Orthofinder_GuideTree.txt) was used.
+To guide the inference process and improve the accuracy of the orthology assignment, the guide tree [Zygn_Orthofinder_GuideTree.txt](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/09_OrthoFinder/Zygnematophyceae_Guide_Tree.txt) was used.
 
 
 >[!NOTE]
