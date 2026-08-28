@@ -1,17 +1,46 @@
 #!/bin/bash
 
-PROGRAMPATH=~/Programs/FilterPPPResult/FilterPPPResult_Debian.out #FilterPPPResult_Debian.out Change the path
-INPUT= #<OutputFolderScript16/phylopypruner_output/output_alignments/ #phylopypruner_output/output_alignments/ #Change Thiss
+# ==============================================================================
+# FilterPPPResult (FPPP)
+# ==============================================================================
 
-OUTPUT= #Change This Output Path
-TAXONOMIC_GROUPFILE=~/TaxonomicGroup/Zygnematophyceae_TaxonomicGroupFile_WORKING.txt #Taxonomic Group file see (See /10_OrthogroupSequenceGrabber_OSG/TaxonomicGroupFiles/ for examples)
-SUMMARY_FILE= #Output folder where the summary file ends up. Don't make it the same as the Output folder, since it's hard to find it back otherwise due to the file size.
-NUMBER_OF_FILTER_GROUPS=10 #Change This. Threshold of for the amount of taxonomic groups
+# Program
+PROGRAMPATH="/home/maaike/Programs/FilterPPPResult/FilterPPPResult_Debian.out"
 
-#Filter PPP result based on NUMBER_OF_FILTER_GROUPS
-#with gene ids
-#$PROGRAMPATH -f $INPUT -t $TAXONOMIC_GROUPFILE -r $OUTPUT -n $NUMBER_OF_FILTER_GROUPS -s $SUMMARY_FILE
+# Input: PhyloPyPruner output alignments
+INPUT="/data/maaike/Phylogenomics/Zygnematophyceae/Without_Roya/13_PPP/COGS/phylopypruner_output/output_alignments/"
 
-#Without Gene IDs or alignments
-$PROGRAMPATH -f $INPUT -t $TAXONOMIC_GROUPFILE -r $OUTPUT -n $NUMBER_OF_FILTER_GROUPS -s $SUMMARY_FILE -a -h
+# Output
+OUTPUT="/data/maaike/Phylogenomics/Zygnematophyceae/Without_Roya/14_FPPP/30_COGS/"
 
+# Taxonomic group file
+TAXONOMIC_GROUPFILE="/data/maaike/Phylogenomics/Zygnematophyceae/TaxonomicGroup/TaxonomicGroupFile_FPPP_Zygnema.txt"
+
+# Directory for the summary file
+SUMMARY_FILE="/data/maaike/Phylogenomics/Zygnematophyceae/Without_Roya/14_FPPP/"
+
+# Minimum number of taxonomic groups required
+NUMBER_OF_FILTER_GROUPS=30
+
+
+# ==============================================================================
+# Run FilterPPPResult
+# ==============================================================================
+
+# With gene IDs and alignments
+# "$PROGRAMPATH" \
+#     -f "$INPUT" \
+#     -t "$TAXONOMIC_GROUPFILE" \
+#     -r "$OUTPUT" \
+#     -n "$NUMBER_OF_FILTER_GROUPS" \
+#     -s "$SUMMARY_FILE"
+
+# Without gene IDs or alignments
+"$PROGRAMPATH" \
+    -f "$INPUT" \
+    -t "$TAXONOMIC_GROUPFILE" \
+    -r "$OUTPUT" \
+    -n "$NUMBER_OF_FILTER_GROUPS" \
+    -s "$SUMMARY_FILE" \
+    -a \
+    -h
