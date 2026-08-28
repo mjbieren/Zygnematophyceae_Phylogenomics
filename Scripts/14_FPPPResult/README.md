@@ -10,6 +10,10 @@ Users can generate a summary file that details the number of input FASTA files, 
 
 
 ## Taxonomic Group Files & Thresholds
-For both sets, we used a threshold of 10 out of 28.
+For both sets, we used a threshold of 10 out of 28 with the file [TaxonomicGroupFile_FPPP_Zygnema.txt](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/14_FPPPResult/TaxonomicGroupFile_FPPP_Zygnema.txt)
 
-> ⚠️ The execution of script [Zygnematophyceae_TaxonomicGroupFile_FilterPPP_Set.txt](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/14_FPPPResult/Zygnematophyceae_TaxonomicGroupFile_FilterPPP_Set.txt) is the same for both sets — only the input files and output value differ.
+> ⚠️ The execution of script [14A_FilterPPP_Result_AndRemoveHeadersNumbers_Ingroup.sh](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/14_FPPPResult/14A_FilterPPP_Result_AndRemoveHeadersNumbers_Ingroup.sh) 
+
+And [14B_FilterPPP_Result_AndRemoveHeadersNumbers_Outgroup.sh](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/14_FPPPResult/14B_FilterPPP_Result_AndRemoveHeadersNumbers_Outgroup.sh) 
+
+is the same for both sets — only the input files and output value differ.
