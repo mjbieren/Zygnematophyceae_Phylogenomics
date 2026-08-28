@@ -149,26 +149,78 @@ Detailed scripts and commands used for this project are provided in `02_Trinity`
 
 # Subsequent Phylogenomic Workflow
 
-Following transcriptome assembly, the Zygnematophyceae dataset was processed through the same general phylogenomic framework documented in this repository:
+Following transcriptome assembly, the Zygnematophyceae dataset was processed through the following phylogenomic workflow:
 
-1. **SuperTranscript generation**
-2. **BUSCO completeness assessment**
-3. **Protein prediction with TransDecoder**
-4. **Post-prediction BUSCO assessment**
-5. **Protein-set decontamination**
-6. **Post-decontamination BUSCO assessment**
-7. **Orthogroup inference with OrthoFinder**
-8. **Orthogroup sequence extraction**
-9. **Multiple sequence alignment and gene-tree inference**
-10. **Paralog identification and pruning with PhyloPyPruner**
-11. **Orthogroup filtering and dataset combination**
-12. **PREQUAL, MAFFT and ClipKIT alignment processing**
-13. **Concatenation of single-copy ortholog alignments**
-14. **Phylogenetic inference with IQ-TREE**
-15. **Tree visualization and annotation with iTOL**
+3. **SuperTranscript generation**  
+   → [03_SuperTranscript](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/03_SuperTranscript)
 
-Project-specific parameters, taxonomic thresholds, reference datasets and filtering criteria are documented within the corresponding workflow directories and should be consulted rather than assumed to be identical to those used for other phylogenomic datasets.
+4. **BUSCO I – Transcriptome completeness assessment**  
+   → [04_BUSCO_I](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/04_BUSCO_I)
 
+5. **Protein prediction with TransDecoder**  
+   → [05_TransDecoder](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/05_TransDecoder)
+
+6. **BUSCO II – Post-prediction completeness assessment**  
+   → [06_BUSCO_II](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/06_BUSCO_II)
+
+7. **Protein-set decontamination**  
+   → [07_Decontamination](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/07_Decontamination)
+
+8. **BUSCO III – Post-decontamination completeness assessment**  
+   → [08_BUSCO_III](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/08_BUSCO_III)
+
+9. **Orthogroup inference with OrthoFinder**  
+   → [09_OrthoFinder](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/09_OrthoFinder)
+
+10. **Orthogroup sequence extraction with OSG**  
+    → [10_OSG](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/10_OSG)
+
+11. **Multiple sequence alignment and gene-tree inference with MIAF**  
+    → [11_MIAF](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/11_MIAF)
+
+12. **Apply PhyloPyPruner Format (APPPFormat)**  
+    → [12_APPPF](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/12_APPPF)
+
+13. **Paralog pruning with PhyloPyPruner**  
+    → [13_PPP](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/13_PPP)
+
+14. **Filter PhyloPyPruner results**  
+    → [14_FPPPResult](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/14_FPPPResult)
+
+15. **Combine orthogroup sets (COGS)**  
+    → [15_COGS](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/15_COGS)
+
+16. **Paralog pruning of the combined orthogroup dataset with PhyloPyPruner**  
+    → [16_PPP_COGS](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/16_PPP_COGS)
+
+17. **Filter final combined orthogroups**  
+    → [17_FPPPResult_COGS](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/17_FPPPRResult_COGS)
+
+18. **PREQUAL, MAFFT and ClipKIT alignment processing**  
+    → [18_PREQUAL](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/18_PREQUAL)
+
+19. **Concatenation of single-copy ortholog alignments**  
+    → [19_Concatenation](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/19_Concatenation)
+
+20. **Final phylogenetic inference with IQ-TREE**  
+    → [20_IQTree](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/20_IQTree)
+
+21. **Tree visualization and annotation with iTOL**  
+    → [21_ITOL](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/21_ITOL)
+
+22. **Divergence-time estimation (TimeTree)**  
+    → [22_TimeTree](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/22_TimeTree)
+
+23. **Approximately Unbiased (AU) topology tests**  
+    → [23_AU_Test](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/23_AU_Test)
+
+24. **Ancestral Character State Reconstruction (ACSR)**  
+    → [24_ACSR](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/24_ACSR)
+
+25. **Differential expression interpretation for orthogroups**  
+    → [25_DE](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/tree/main/Scripts/25_DE)
+
+Project-specific parameters, taxonomic thresholds, reference datasets, filtering criteria and example scripts are documented within the corresponding workflow directories and should be consulted rather than assumed to be identical to those used for other phylogenomic datasets.
 ---
 
 # Data Availability
