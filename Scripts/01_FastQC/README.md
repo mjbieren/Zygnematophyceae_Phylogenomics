@@ -12,7 +12,7 @@ This is the **first step** in the RNA-seq data processing pipeline and involves 
 
 To run FastQC on each subdirectory (one level deep), use the provided script:
 
-👉 [`01_FastQC_Dir.sh`](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/01_FastQC/01_FastQC_MultiQC_Dir.sh)
+👉 [`01_FastQC_MultiQC_Dir.sh`](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/01_FastQC/01_FastQC_MultiQC_Dir.sh)
 
 Alternatively, you can run FastQC manually within any directory:
 
