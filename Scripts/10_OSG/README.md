@@ -30,10 +30,10 @@ These complementary sets are later merged to provide a strong phylogenetic signa
 The dataset that favors the outgroups of the dataset
 
 - **Taxonomic group file:**  
-  [`Zygnematophyceae_TaxonomicGroupFile_Outgroup_set.txt`](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/10_OSG/TaxonomicGroupFiles/Zygnematophyceae_TaxonomicGroupFile_Outgroup_set.txt)
+  [`TaxonomicGroupFile_Outgroup_Zygnema.txt`](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/10_OSG/TaxonomicGroupFiles/TaxonomicGroupFile_Outgroup_Zygnema.txt)
 
 - **Threshold:**  
-  Minimum of 10 out of 14 taxonomic groups required per orthogroup.
+  Minimum of 10 out of 16 taxonomic groups required per orthogroup.
 
 
 ### 🔹 Ingroup Set
@@ -41,8 +41,8 @@ The dataset that favors the outgroups of the dataset
 The dataset that favors the ingroup of the dataset (Aka the Zygnematophyceae species)
 
 - **Taxonomic group file:**  
-  [`Zygnematophyceae_TaxonomicGroupFile_Ingroup_Set.txt`](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/10_OSG/TaxonomicGroupFiles/Zygnematophyceae_TaxonomicGroupFile_Ingroup_Set.txt)
-
+    [`TaxonomicGroupFile_Ingroup_Zygnema.txt`](https://github.com/mjbieren/Zygnematophyceae_Phylogenomics/blob/main/Scripts/10_OSG/TaxonomicGroupFiles/TaxonomicGroupFile_Ingroup_Zygnema.txt)
+  
 - **Threshold:**  
   Minimum of 2 out of 4 taxonomic groups required per orthogroup.
 
