@@ -1,21 +1,127 @@
 #!/bin/bash
 
-SINGULARITY_HOME_PATH=${PWD} #Generally don't change or know what you're doing ;)
-CPU=24 #change
-RAM=300G #Change
-STRAIN=${PWD##**/} #Name of the output file, generally I use the strain name but you can also do whatever you want here. Just that the files will be named like that :) I've my raw samples ordered as: ~/STRAINNAME/RawData/x_1.fq.gz | x_2.fq.gz. The output file will be named in this case STRAINNAME.Trinity.fasta and STRAINNAME.Trinity.gene_maps
-TRINITY_OUTPUT=Trinity_Output #Don't touch (This script auto deletes the trinity output file, as this creates easily a couple 100g in data).
-IN1=/home/RawData/SAMPLE1_1.fq.gz #FullPath_x1_1.fg.qz,FullPath_x2_1fq.gz //Change Pair Left
-IN2=/home/RawData/SAMPLE1_2.fq.gz #x1_2.fg.qz,x2_2fq.gz //Change Pair Right
+# ============================================================
+# Trinity assembly script
+#
+# Expected folder structure:
+#
+# ~/STRAINNAME/
+# ├── RawData/
+# │   ├── SAMPLE1_1.fq.gz
+# │   └── SAMPLE1_2.fq.gz
+# └── Trinity.sh
+#
+# Output:
+# STRAINNAME.Trinity.fasta
+# STRAINNAME.Trinity.gene_maps
+# ============================================================
 
-SINGULARITY_TRINITY_IMAGE=~/Singularity_Objects/Trinity/trinityrnaseq.v2.15.1.simg #Change this to your trinity singularity (Downlaod at: https://data.broadinstitute.org/Trinity/TRINITY_SINGULARITY/)
 
-#Novogene adapter Pair
-singularity exec --home ${SINGULARITY_HOME_PATH}:/home -e ${SINGULARITY_TRINITY_IMAGE} Trinity --seqType fq --left ${IN1} --right ${IN2} --output /home/${TRINITY_OUTPUT} --CPU ${CPU} --trimmomatic --full_cleanup --max_memory ${RAM} --quality_trimming_params "ILLUMINACLIP:/mnt/uni08/applbioinfdevries/MAAIKE/Adapters/novogene_adapter_sequences.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36"
+# ------------------------------------------------------------
+# SETTINGS
+# ------------------------------------------------------------
 
-#Rename the last output files :)
-mv ${SINGULARITY_HOME_PATH}/Trinity_Output.Trinity.fasta ${SINGULARITY_HOME_PATH}/${STRAIN}.Trinity.fasta
-mv ${SINGULARITY_HOME_PATH}/Trinity_Output.Trinity.fasta.gene_trans_map ${SINGULARITY_HOME_PATH}/${STRAIN}.Trinity.gene_maps
+SINGULARITY_HOME_PATH="${PWD}"
+# Generally don't change unless you know what you're doing ;)
 
-#Remove the Trinity output folder in case it isn't deleted (sometimes happens.) but ignore if it already happens.
-rm -r ${SINGULARITY_HOME_PATH}/${TRINITY_OUTPUT} || true
+CPU=24
+RAM=300G
+
+# Uses the current directory name as strain name
+STRAIN="${PWD##*/}"
+
+# Trinity temporary/output directory
+# Trinity --full_cleanup normally removes most of this itself
+TRINITY_OUTPUT="Trinity_Output"
+
+
+# ------------------------------------------------------------
+# RAW READS
+# ------------------------------------------------------------
+
+# Full path to LEFT/R1 reads
+IN1="/home/RawData/SAMPLE1_1.fq.gz"
+
+# Full path to RIGHT/R2 reads
+IN2="/home/RawData/SAMPLE1_2.fq.gz"
+
+# For multiple libraries, comma-separate the files:
+#
+# IN1="/path/sample1_1.fq.gz,/path/sample2_1.fq.gz"
+# IN2="/path/sample1_2.fq.gz,/path/sample2_2.fq.gz"
+
+
+# ------------------------------------------------------------
+# TRINITY SINGULARITY IMAGE
+# ------------------------------------------------------------
+
+SINGULARITY_TRINITY_IMAGE=~/Singularity_Objects/Trinity/trinityrnaseq.v2.15.1.simg
+
+
+# ------------------------------------------------------------
+# NOVOGENE ADAPTER FILE
+# ------------------------------------------------------------
+
+NOVOGENE_ADAPTERS="~/novogene_adapter_sequences.fa" #Change this to the right adapater
+
+
+# ============================================================
+# RUN TRINITY
+# ============================================================
+
+echo "========================================"
+echo "Running Trinity"
+echo "Strain: ${STRAIN}"
+echo "CPU:    ${CPU}"
+echo "RAM:    ${RAM}"
+echo "========================================"
+
+
+singularity exec \
+    --home "${SINGULARITY_HOME_PATH}:/home" \
+    -e \
+    "${SINGULARITY_TRINITY_IMAGE}" \
+    Trinity \
+    --seqType fq \
+    --left "${IN1}" \
+    --right "${IN2}" \
+    --output "/home/${TRINITY_OUTPUT}" \
+    --CPU "${CPU}" \
+    --max_memory "${RAM}" \
+    --trimmomatic \
+    --quality_trimming_params \
+    "ILLUMINACLIP:${NOVOGENE_ADAPTERS}:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36" \
+    --full_cleanup
+
+
+# ============================================================
+# RENAME OUTPUT
+# ============================================================
+
+echo "Renaming Trinity output files..."
+
+mv \
+    "${SINGULARITY_HOME_PATH}/${TRINITY_OUTPUT}.Trinity.fasta" \
+    "${SINGULARITY_HOME_PATH}/${STRAIN}.Trinity.fasta"
+
+mv \
+    "${SINGULARITY_HOME_PATH}/${TRINITY_OUTPUT}.Trinity.fasta.gene_trans_map" \
+    "${SINGULARITY_HOME_PATH}/${STRAIN}.Trinity.gene_maps"
+
+
+# ============================================================
+# CLEANUP
+# ============================================================
+
+# Remove Trinity output directory if it still exists.
+# --full_cleanup normally handles this already.
+rm -rf "${SINGULARITY_HOME_PATH:?}/${TRINITY_OUTPUT}" || true
+
+
+echo "========================================"
+echo "Trinity finished: ${STRAIN}"
+echo
+echo "Output:"
+echo "${STRAIN}.Trinity.fasta"
+echo "${STRAIN}.Trinity.gene_maps"
+echo "========================================"
